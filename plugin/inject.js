@@ -2,8 +2,13 @@
 
 (function() {
 
-    alert('here');
+    console.log('injected: ', {state});
     
-	console.log('injected: ', {state});
+    let isIndex = hasSubmitButton();
+
+    function hasSubmitButton() {
+        let submit = document.getElementById("submit");
+        console.log({submit});
+    }
 
 })();
