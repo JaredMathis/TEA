@@ -4,9 +4,9 @@
 
     console.log('injected: ', {state});
     
-    let isIndex = hasSubmitButton();
+    
 
-    function hasSubmitButton() {
+    function isIndex() {
         let submit = document.getElementById("submit");
         console.log({submit});
     }
