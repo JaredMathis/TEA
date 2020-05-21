@@ -1,12 +1,15 @@
 // this is the code which will be injected into a given page...
 
-(function() {
+(function () {
     function log(message) {
         console.log('injected: ' + message);
     }
-    
+
+    console.log({state});
+
     if (isIndex()) {
         indexClickRow(state);
+        indexClickSubmit(state);
     } else {
         log('not index');
     }
@@ -33,13 +36,13 @@
 
     function downloadsDownloadXML(state) {
         let downloadXML = document.getElementById("downloadXML");
-        downloadXML.setAttribute('download', 'XML-renamed.csv');
+        downloadXML.setAttribute('download', 'XML-' + state.entityName + '.csv');
         downloadXML.click();
     }
 
     function downloadsDownloadCSV(state) {
         let downloadCSV = document.getElementById("downloadCSV");
-        downloadCSV.setAttribute('download', 'CSV-renamed.csv');
+        downloadCSV.setAttribute('download', 'CSV-' + state.entityName + '.csv');
         downloadCSV.click();
     }
 
@@ -69,6 +72,37 @@
 
     function indexClickRow(state) {
         log('indexClickRow: entered');
+        console.log({ state })
+
+        let rows = document.getElementsByTagName("TR");
+        console.log({ rows });
+
+        // +1 because the first row is the table
+        // header
+        const entityRow = rows[state.entityRow + 1];
+        console.log({ entityRow });
+
+        if (!entityRow) {
+            chrome.runtime.sendMessage({
+                stop: true,
+            });
+            log('indexClickRow: stopping');
+            return;
+        }
+
+        let entityName = entityRow.cells[1].innerHTML;
+
+        log('indexClickRow: sending message');
+        chrome.runtime.sendMessage({
+            entityName,
+            entityRow: state.entityRow + 1,
+        });
+
+        entityRow.click();
+    }
+
+    function indexClickSubmit(state) {
+        log('indexClickSubmit: entered');
 
         let submit = document.getElementById("submit");
 

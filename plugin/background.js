@@ -2,19 +2,40 @@
 
 let active = false;
 
+
+let state;
+
+
+chrome.runtime.onMessage.addListener(message => {
+    if (message.entityName) {
+        state.entityName = message.entityName;
+    }
+    if (message.entityRow) {
+        state.entityRow = message.entityRow;
+    }
+    if (message.stop) {
+        active = false;
+    }
+});
+
 // listen for our browerAction to be clicked
 chrome.browserAction.onClicked.addListener(function (tab) {
     active = !active;
     console.log('clicked', {active})
 
-    run();
+    if (active) {
+        state = {
+            entityRow: 0,
+        };
+        run();
+    }
 });
 
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
     if (changeInfo.status !== 'complete') {
         return;
     }
-    console.log({active})
+    console.log('onUpdated', {active})
     if (!active) {
         return;
     }
@@ -23,12 +44,7 @@ chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
   })
 
   function run() {
-
-
-    let state = {
-        entityRow: 1,
-    };
-
+    console.log('run', {state})
     chrome.tabs.executeScript(null, {
         code: 'var state = ' + JSON.stringify(state)
     }, function() {
