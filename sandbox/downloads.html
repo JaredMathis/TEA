@@ -1,0 +1,44 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body 
+    ng-app="sandbox"
+    ng-controller="DownloadsController" 
+    style="text-align:center">
+
+    Select category of existing CRRs to download.
+
+    <select
+    class="custom-select"
+    ng-options="category for category in categories"
+    ng-model="selectedCategory"></select>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    Download Type
+                </th>
+                <th>
+                    Last Modified Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Existing CRRs</td>
+                <td>
+                    CSV Format<br>
+                    XML Format<br>
+                </td>
+                <td>
+                    2020-01-01
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="sandbox.js"></script>
+</head>

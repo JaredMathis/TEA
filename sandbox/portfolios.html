@@ -1,0 +1,37 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body 
+    ng-app="sandbox"
+    ng-controller="EntityController" 
+    style="text-align:center">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Public CRR</th>
+                <th>
+                    <span ng-click="private = !private">Private CRR</span>
+                
+                    <table class="table table-bordered"
+                        ng-show="private">
+                        <tr>
+                            <td>
+                                <a href="downloads.html">Downloads</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Messages</td>
+                        </tr>
+                        <tr>
+                            <td>Auction Portfolio</td>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+        </thead>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="sandbox.js"></script>
+</head>
