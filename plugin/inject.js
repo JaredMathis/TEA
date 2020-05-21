@@ -44,6 +44,7 @@
     }
 
     function downloadsChangeToAllocation(state) {
+        log('downloadsChangeToAllocation: entered')
         let c = document.getElementById("category");
         // Select the 3rd choice (Allocation)
         c.selectedIndex = 2;
@@ -67,7 +68,7 @@
     }
 
     function isDownloads() {
-        let downloadCSV = document.getElementById("downloadCSV");
+        let downloadCSV = document.getElementById("category");
         return !!downloadCSV;
     }
 
