@@ -22,11 +22,31 @@
     }
 
     if (isDownloads()) {
-        downloadsDownloadCSV(state);
-        downloadsDownloadXML(state);
-        ReturnToEntityAndRoleSelection(state);
+        if (downloadsHasDownloads(state)) {
+            downloadsDownloadCSV(state);
+            downloadsDownloadXML(state);
+        }
+
+        downloadsChangeToAllocation(state);
+
+        if (downloadsHasDownloads(state)) {
+            downloadsDownloadCSV(state);
+            downloadsDownloadXML(state);
+        }
+        //ReturnToEntityAndRoleSelection(state);
     } else {
         log('not downloads');
+    }
+
+    function downloadsHasDownloads(state) {
+        let downloadXML = document.getElementById("downloadXML");
+        return !!downloadXML;
+    }
+
+    function downloadsChangeToAllocation(state) {
+        let c = document.getElementById("category");
+        // Select the 3rd choice (Allocation)
+        c.selectedIndex = 2;
     }
 
     function ReturnToEntityAndRoleSelection(state) {
